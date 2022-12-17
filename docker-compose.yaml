@@ -8,9 +8,20 @@ services:
       DB_SERVER: "sql-server"
       SERVICE_NAME: "Airport"
     ports:
-    - "6006:80"
+    - "6001:80"
     build:
       context: ./Services/Airport
+
+  plane-service:
+    container_name: plane-service
+    image: plane-service
+    environment:
+      DB_SERVER: "sql-server"
+      SERVICE_NAME: "Plane"
+    ports:
+    - "6002:80"
+    build:
+      context: ./Services/PlaneTransport
 
   sql-server:
     container_name: sql-server
@@ -20,4 +31,4 @@ services:
       SA_PASSWORD: "yourStrong(!)Password"
       MSSQL_PID: Express
     ports:
-      - "1435:1433"
+      - "1434:1433"
