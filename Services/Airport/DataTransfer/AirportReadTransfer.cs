@@ -1,6 +1,6 @@
 ﻿namespace Airport.DataTransfer
 {
-    public class AirportReadDto : AirportCreateDto
+    public class AirportReadTransfer : AirportCreateTransfer
     {
         public long Id { get; set; }
     }

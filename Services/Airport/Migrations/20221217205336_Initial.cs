@@ -2,7 +2,7 @@
 
 namespace Airport.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,6 +29,7 @@ namespace Airport.Migrations
                     AirportModelsAirportEntity_id = table.Column<long>(name: "Airport.Models.AirportEntity_id", type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AirportAddressId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>

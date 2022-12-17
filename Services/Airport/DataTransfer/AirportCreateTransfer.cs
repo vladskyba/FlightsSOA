@@ -1,6 +1,6 @@
 ﻿namespace Airport.DataTransfer
 {
-    public class AirportCreateDto
+    public class AirportCreateTransfer
     {
         public string Name { get; set; }
 
@@ -8,6 +8,6 @@
 
         public bool IsActive { get; set; }
 
-        public AirportAddressDto AirportAddress { get; set; }
+        public AirportAdressBaseTransfer AirportAddress { get; set; }
     }
 }

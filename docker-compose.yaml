@@ -7,6 +7,8 @@ services:
     environment:
       DB_SERVER: "sql-server"
       SERVICE_NAME: "Airport"
+      RABBITMQ_HOST: "rabbitmq"
+      RABBITMQ_PORT: "5672"
     ports:
     - "6001:80"
     build:
@@ -18,6 +20,8 @@ services:
     environment:
       DB_SERVER: "sql-server"
       SERVICE_NAME: "Plane"
+      RABBITMQ_HOST: "rabbitmq"
+      RABBITMQ_PORT: "5672"
     ports:
     - "6002:80"
     build:
@@ -32,3 +36,16 @@ services:
       MSSQL_PID: Express
     ports:
       - "1434:1433"
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmqdata:/var/lib/rabbitmq
+    hostname: rabbitmq
+
+volumes:
+  rabbitmqdata:

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Airport.Migrations
 {
     [DbContext(typeof(AirportContext))]
-    [Migration("20221216161954_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221217205336_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,6 +55,9 @@ namespace Airport.Migrations
 
                     b.Property<long>("AirportAddressId")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

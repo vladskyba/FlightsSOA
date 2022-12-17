@@ -7,18 +7,25 @@ using System.Threading.Tasks;
 using Airport.DataTransfer;
 using AutoMapper;
 using System.ComponentModel.DataAnnotations;
+using Airport.AsyncDataServices;
+using Airport.DataTransfer.Messaging;
 
 namespace Airport.Controllers
 {
     public class AirportController : ControllerBase
     {
-        public readonly IGenericRepository<AirportEntity> _airportRepository;
+        private readonly IGenericRepository<AirportEntity> _airportRepository;
+
+        private readonly IMessageBusClient _messageBusClient;
 
         private readonly IMapper _mapper;
 
-        public AirportController(IGenericRepository<AirportEntity> airportRepository, IMapper mapper)
+        public AirportController(IGenericRepository<AirportEntity> airportRepository,
+            IMessageBusClient messageBusClient,
+            IMapper mapper)
         {
             _airportRepository = airportRepository;
+            _messageBusClient = messageBusClient;
             _mapper = mapper;
         }
 
@@ -26,28 +33,34 @@ namespace Airport.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [SwaggerResponse(StatusCodes.Status201Created, Type = typeof(AirportReadDto))]
-        public async Task<IActionResult> CreateAirport([FromBody] AirportCreateDto airportDto)
+        [SwaggerResponse(StatusCodes.Status201Created, Type = typeof(AirportReadTransfer))]
+        public async Task<IActionResult> CreateAirport([FromBody] AirportCreateTransfer airportDto)
         {
             var airportModel = _mapper.Map<AirportEntity>(airportDto);
 
             var addedAirport = await _airportRepository.AddAsync(airportModel);
-            return Ok(_mapper.Map<AirportReadDto>(addedAirport));
+            var airportRepresentation = _mapper.Map<AirportReadTransfer>(addedAirport);
+            var airportPublishing = _mapper.Map<AirportPublished>(airportRepresentation);
+            airportPublishing.Event = "airport.created";
+
+            _messageBusClient.PuslishCreatedAirport(airportPublishing);
+
+            return Ok(airportRepresentation);
         }
 
         [HttpPut("updateAirport")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [SwaggerResponse(StatusCodes.Status201Created, Type = typeof(AirportReadDto))]
-        public async Task<IActionResult> UpdateAirport([Required] long airportId, [FromBody] AirportCreateDto airportDto)
+        [SwaggerResponse(StatusCodes.Status201Created, Type = typeof(AirportReadTransfer))]
+        public async Task<IActionResult> UpdateAirport([Required] long airportId, [FromBody] AirportCreateTransfer airportDto)
         {
             var airportModel = _mapper.Map<AirportEntity>(airportDto);
             airportModel.Id = airportId;
 
             var addedAirport = await _airportRepository.UpdateAsync(airportModel);
             
-            return Ok(_mapper.Map<AirportReadDto>(addedAirport));
+            return Ok(_mapper.Map<AirportReadTransfer>(addedAirport));
         }
     }
 }

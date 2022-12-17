@@ -1,6 +1,6 @@
 ﻿namespace Airport.DataTransfer
 {
-    public class AirportAddressDto
+    public class AirportAdressBaseTransfer
     {
         public string Country { get; set; }
 

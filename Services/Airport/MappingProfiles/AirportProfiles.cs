@@ -8,13 +8,13 @@ namespace Airport.MappingProfiles
     {
         public AirportProfiles()
         {
-            CreateMap<AirportEntity, AirportCreateDto>()
+            CreateMap<AirportEntity, AirportCreateTransfer>()
                 .ReverseMap();
 
-            CreateMap<AirportEntity, AirportReadDto>()
+            CreateMap<AirportEntity, AirportReadTransfer>()
             .ReverseMap();
 
-            CreateMap<AirportAddressDto, AirportAddress>()
+            CreateMap<AirportAdressBaseTransfer, AirportAddress>()
             .ReverseMap();
         }
     }

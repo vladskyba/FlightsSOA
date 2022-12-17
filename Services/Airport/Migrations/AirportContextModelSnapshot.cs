@@ -54,6 +54,9 @@ namespace Airport.Migrations
                     b.Property<long>("AirportAddressId")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 

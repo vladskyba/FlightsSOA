@@ -1,3 +1,4 @@
+using Airport.AsyncDataServices;
 using Airport.Context;
 using Airport.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -22,12 +23,13 @@ namespace Airport
 
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            services.AddSingleton<IMessageBusClient, MessageBusClient>();
 
             var server = Configuration["DB_SERVER"] ?? "localhost";
             var port = Configuration["DB_PORT"] ?? "1433";
