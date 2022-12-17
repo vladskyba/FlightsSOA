@@ -2,7 +2,7 @@
 
 namespace PlaneTransport.Migrations
 {
-    public partial class Initiallization : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,6 @@ namespace PlaneTransport.Migrations
                     PlaneTransportModelsPlane_id = table.Column<long>(name: "PlaneTransport.Models.Plane_id", type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Capacity = table.Column<int>(type: "int", nullable: false),
                     PlaneType = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

@@ -9,8 +9,8 @@ using PlaneTransport.Context;
 namespace PlaneTransport.Migrations
 {
     [DbContext(typeof(PlaneContext))]
-    [Migration("20221217124649_Initiallization")]
-    partial class Initiallization
+    [Migration("20221217151041_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,9 +27,6 @@ namespace PlaneTransport.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("PlaneTransport.Models.Plane_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Capacity")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

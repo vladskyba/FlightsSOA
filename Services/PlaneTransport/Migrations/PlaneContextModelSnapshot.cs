@@ -26,9 +26,6 @@ namespace PlaneTransport.Migrations
                         .HasColumnName("PlaneTransport.Models.Plane_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Capacity")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 

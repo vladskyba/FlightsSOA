@@ -13,6 +13,8 @@ namespace PlaneTransport.Context
 
         public DbSet<Plane> Plane { get; set; }
 
+        public DbSet<PlaneSeat> PlaneSeat { get; set; }
+
         // Apply all of Entities Configurations presented in EntitiesConfigurations folder
         protected override void OnModelCreating(ModelBuilder builder)
         {
