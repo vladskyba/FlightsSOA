@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  airport-service:
+    container_name: airport-service
+    image: airport-service
+    environment:
+      DB_SERVER: "sql-server"
+      SERVICE_NAME: "Airport"
+    ports:
+    - "6006:80"
+    build:
+      context: ./Services/Airport
+
+  sql-server:
+    container_name: sql-server
+    image: mcr.microsoft.com/mssql/server:latest
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "yourStrong(!)Password"
+      MSSQL_PID: Express
+    ports:
+      - "1435:1433"
