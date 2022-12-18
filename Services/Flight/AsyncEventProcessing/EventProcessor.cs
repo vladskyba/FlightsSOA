@@ -25,11 +25,11 @@ namespace Flight.AsyncEventProcessing
         {
             var eventType = DetermineEvent(message);
 
-            Console.WriteLine($"Event determined:{eventType}");
+            Console.WriteLine($"Event determined: {eventType}");
 
             switch (eventType)
             {
-                case EventType.CreatedAirport:
+                case EventType.AirportPushed:
                     await AddAirport(message);
                     Console.WriteLine("Airport Pushed to database!");
                     break;
@@ -45,12 +45,9 @@ namespace Flight.AsyncEventProcessing
                 using (var scope = _scopeFactory.CreateScope())
                 {
                     var repository = scope.ServiceProvider.GetRequiredService<IGenericRepository<Airport>>();
-
                     var deserrialized = JsonSerializer.Deserialize<AirportPublished>(publishedMessage);
-
                     var airportEntity = _mapper.Map<Airport>(deserrialized);
-                    airportEntity.Id = 0;
-                    var added = await repository.AddAsync(airportEntity);
+                    var upserted = await repository.UpsertAsync(airportEntity);
                 }
             }
             catch (Exception exception)
@@ -59,24 +56,24 @@ namespace Flight.AsyncEventProcessing
             }
         }
 
-        private EventType DetermineEvent(string message)
+        private static EventType DetermineEvent(string message)
         {
             var eventType = JsonSerializer.Deserialize<PublishedBase>(message);
             Console.WriteLine($"Event: {eventType.Event}");
 
             switch (eventType.Event)
             {
-                case "airport.created":
-                    return EventType.CreatedAirport;
+                case "airport.pushed":
+                    return EventType.AirportPushed;
                 default:
-                    return EventType.Unqualified;
+                    return EventType.Unrecognized;
             }
         }
     }
     
     enum EventType
     {
-        Unqualified,
-        CreatedAirport
+        Unrecognized,
+        AirportPushed
     }
 }

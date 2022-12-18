@@ -1,5 +1,4 @@
-﻿using Flight.Models.Replications;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Flight.ModelsConfigurations
@@ -10,7 +9,7 @@ namespace Flight.ModelsConfigurations
         {
             base.Configure(flight);
 
-            flight.ToTable("flight")
+            flight.ToTable(nameof(Models.Flight).ToSnakeCase())
                 .HasKey(t => t.Id);
 
             flight.HasOne(t => t.ArrivalAirport)
@@ -27,7 +26,20 @@ namespace Flight.ModelsConfigurations
                 .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
 
-            flight.Property(x => x.Cost).HasColumnType("decimal");
+            flight.Property(a => a.DepartureTime)
+                .HasColumnName(nameof(Models.Flight.DepartureTime).ToSnakeCase());
+
+            flight.Property(a => a.ArrivalTime)
+                .HasColumnName(nameof(Models.Flight.ArrivalTime).ToSnakeCase());
+
+            flight.Property(a => a.DepartureAirportId)
+                .HasColumnName(nameof(Models.Flight.DepartureAirportId).ToSnakeCase());
+
+            flight.Property(a => a.AirplaneId)
+                .HasColumnName(nameof(Models.Flight.AirplaneId).ToSnakeCase());
+
+            flight.Property(x => x.Cost).HasColumnType("decimal")
+                .HasColumnName(nameof(Models.Flight.Cost).ToSnakeCase());
         }
     }
 }

@@ -11,10 +11,7 @@ namespace Flight.MappingProfiles
         {
             CreateMap<Airport, AirportReadTransfer>();
             CreateMap<AirportAddress, AirportAdressReadTransfer>();
-            
-            CreateMap<AirportPublished, Airport>()
-                .ForMember(dest => dest.ExternalId, opt => opt.MapFrom(src => src.Id));
-
+            CreateMap<AirportPublished, Airport>();
             CreateMap<AirportAdressPublished, AirportAddress>();
         }
     }

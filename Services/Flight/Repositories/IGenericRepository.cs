@@ -18,5 +18,7 @@ namespace Flight.Repositories
         Task<TEntity> AddAsync(TEntity entity);
 
         Task<TEntity> UpdateAsync(TEntity entity);
+
+        Task<TEntity> UpsertAsync(TEntity entity);
     }
 }

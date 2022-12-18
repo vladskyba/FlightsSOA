@@ -80,5 +80,25 @@ namespace Flight.Repositories
     
             return entity;
         }
+
+        public async Task<TEntity> UpsertAsync(TEntity entity)
+        {
+            var exist = await _context.Set<TEntity>()
+                          .AsNoTracking()
+                          .FirstOrDefaultAsync(x => x.Id == entity.Id);
+
+            if (exist == null)
+            {
+                _context.Set<TEntity>().Add(entity);
+            }
+            else
+            {
+                _context.Set<TEntity>().Update(entity);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return entity;
+        }
     }
 }

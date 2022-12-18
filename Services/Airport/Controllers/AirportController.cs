@@ -40,7 +40,7 @@ namespace Airport.Controllers
             var addedAirport = await _airportRepository.AddAsync(airportModel);
             var airportRepresentation = _mapper.Map<AirportReadTransfer>(addedAirport);
             var airportPublishing = _mapper.Map<AirportPublished>(airportRepresentation);
-            airportPublishing.Event = "airport.created";
+            airportPublishing.Event = "airport.pushed";
 
             _messageBusClient.PuslishCreatedAirport(airportPublishing);
 

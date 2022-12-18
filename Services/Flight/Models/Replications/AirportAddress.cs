@@ -1,6 +1,6 @@
 ﻿namespace Flight.Models.Replications
 {
-    public class AirportAddress : ExternalBase
+    public class AirportAddress : BaseEntity
     {
         public string Country { get; set; }
 
