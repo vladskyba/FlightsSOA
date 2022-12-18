@@ -25,7 +25,7 @@ namespace Flight.Controllers
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [SwaggerResponse(StatusCodes.Status201Created, Type = typeof(FlightReadTransfer))]
-        public async Task<IActionResult> CreateAirport([FromBody] FlightBaseTransfer flightDto)
+        public async Task<IActionResult> CreateFlight([FromBody] FlightBaseTransfer flightDto)
         {
             var flightModel = _mapper.Map<Models.Flight>(flightDto);
             var addedFlight = await _flightRepository.AddAsync(flightModel);

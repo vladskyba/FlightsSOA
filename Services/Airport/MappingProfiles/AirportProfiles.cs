@@ -12,10 +12,13 @@ namespace Airport.MappingProfiles
                 .ReverseMap();
 
             CreateMap<Models.Airport, AirportReadTransfer>()
-            .ReverseMap();
+                .ReverseMap();
 
             CreateMap<AirportAdressBaseTransfer, AirportAddress>()
-            .ReverseMap();
+                .ReverseMap();
+
+            CreateMap<AirportAdressReadTransfer, AirportAddress>()
+                .ReverseMap();
         }
     }
 }

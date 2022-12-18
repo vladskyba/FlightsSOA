@@ -62,10 +62,8 @@ namespace Flight.Migrations
             modelBuilder.Entity("Flight.Models.Replications.Airport", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("airport_id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("airport_id");
 
                     b.Property<long>("AirportAddressId")
                         .HasColumnType("bigint")
@@ -90,10 +88,8 @@ namespace Flight.Migrations
             modelBuilder.Entity("Flight.Models.Replications.AirportAddress", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("airport_address_id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("airport_address_id");
 
                     b.Property<int>("AirportId")
                         .HasColumnType("int")

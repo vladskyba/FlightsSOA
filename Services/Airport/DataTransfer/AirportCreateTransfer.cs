@@ -8,6 +8,6 @@
 
         public bool IsActive { get; set; }
 
-        public AirportAdressBaseTransfer AirportAddress { get; set; }
+        public AirportAdressReadTransfer AirportAddress { get; set; }
     }
 }

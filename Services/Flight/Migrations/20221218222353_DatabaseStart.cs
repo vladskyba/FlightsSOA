@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Flight.Migrations
 {
-    public partial class Initial : Migration
+    public partial class DatabaseStart : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,37 +11,34 @@ namespace Flight.Migrations
                 name: "airport_address",
                 columns: table => new
                 {
-                    airportaddress_id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Zip = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AirportId = table.Column<int>(type: "int", nullable: false),
-                    ExternalId = table.Column<long>(type: "bigint", nullable: false)
+                    airport_address_id = table.Column<long>(type: "bigint", nullable: false),
+                    country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    city = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    zip = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    airport_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_airport_address", x => x.airportaddress_id);
+                    table.PrimaryKey("PK_airport_address", x => x.airport_address_id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "airport",
                 columns: table => new
                 {
-                    airport_id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AirportAddressId = table.Column<long>(type: "bigint", nullable: false),
-                    ExternalId = table.Column<long>(type: "bigint", nullable: false)
+                    airport_id = table.Column<long>(type: "bigint", nullable: false),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    airport_address_id = table.Column<long>(type: "bigint", nullable: false),
+                    is_active = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_airport", x => x.airport_id);
                     table.ForeignKey(
-                        name: "FK_airport_airport_address_AirportAddressId",
-                        column: x => x.AirportAddressId,
+                        name: "FK_airport_airport_address_airport_address_id",
+                        column: x => x.airport_address_id,
                         principalTable: "airport_address",
-                        principalColumn: "airportaddress_id",
+                        principalColumn: "airport_address_id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -51,12 +48,12 @@ namespace Flight.Migrations
                 {
                     flight_id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DepartureAirportId = table.Column<long>(type: "bigint", nullable: false),
+                    departure_airport_id = table.Column<long>(type: "bigint", nullable: false),
                     ArrivalAirportId = table.Column<long>(type: "bigint", nullable: false),
-                    DepartureTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ArrivalTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AirplaneId = table.Column<long>(type: "bigint", nullable: false),
-                    Cost = table.Column<decimal>(type: "decimal", nullable: false)
+                    departure_time = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    arrival_time = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    airplane_id = table.Column<long>(type: "bigint", nullable: false),
+                    cost = table.Column<decimal>(type: "decimal", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,15 +65,15 @@ namespace Flight.Migrations
                         principalColumn: "airport_id");
                     table.ForeignKey(
                         name: "fk_departure_airport",
-                        column: x => x.DepartureAirportId,
+                        column: x => x.departure_airport_id,
                         principalTable: "airport",
                         principalColumn: "airport_id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_airport_AirportAddressId",
+                name: "IX_airport_airport_address_id",
                 table: "airport",
-                column: "AirportAddressId",
+                column: "airport_address_id",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -85,9 +82,9 @@ namespace Flight.Migrations
                 column: "ArrivalAirportId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_flight_DepartureAirportId",
+                name: "IX_flight_departure_airport_id",
                 table: "flight",
-                column: "DepartureAirportId");
+                column: "departure_airport_id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

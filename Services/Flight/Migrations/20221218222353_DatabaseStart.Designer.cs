@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Flight.Migrations
 {
     [DbContext(typeof(FlightContext))]
-    [Migration("20221218193124_Initial")]
-    partial class Initial
+    [Migration("20221218222353_DatabaseStart")]
+    partial class DatabaseStart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,22 +30,27 @@ namespace Flight.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<long>("AirplaneId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("airplane_id");
 
                     b.Property<long>("ArrivalAirportId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("ArrivalTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("arrival_time");
 
                     b.Property<decimal>("Cost")
-                        .HasColumnType("decimal");
+                        .HasColumnType("decimal")
+                        .HasColumnName("cost");
 
                     b.Property<long>("DepartureAirportId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("departure_airport_id");
 
                     b.Property<DateTime>("DepartureTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("departure_time");
 
                     b.HasKey("Id");
 
@@ -59,19 +64,20 @@ namespace Flight.Migrations
             modelBuilder.Entity("Flight.Models.Replications.Airport", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("airport_id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("airport_id");
 
                     b.Property<long>("AirportAddressId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("airport_address_id");
 
-                    b.Property<long>("ExternalId")
-                        .HasColumnType("bigint");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit")
+                        .HasColumnName("is_active");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
 
                     b.HasKey("Id");
 
@@ -84,25 +90,24 @@ namespace Flight.Migrations
             modelBuilder.Entity("Flight.Models.Replications.AirportAddress", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("airportaddress_id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnName("airport_address_id");
 
                     b.Property<int>("AirportId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("airport_id");
 
                     b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("city");
 
                     b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("ExternalId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("country");
 
                     b.Property<string>("Zip")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("zip");
 
                     b.HasKey("Id");
 

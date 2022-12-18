@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Flight.ModelsConfigurations
 {
-    public class AirportAddressEntityConfigurator : BaseEntityConfigurator<AirportAddress>
+    public class AirportAddressEntityConfigurator : ReplicationBaseConfigurator<AirportAddress>
     {
         public override void Configure(EntityTypeBuilder<AirportAddress> airportAddress)
         {

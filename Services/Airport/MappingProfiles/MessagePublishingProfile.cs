@@ -9,7 +9,7 @@ namespace Airport.MappingProfiles
         public MessagePublishingProfile()
         {
             CreateMap<AirportReadTransfer, AirportPublished>();
-            CreateMap<AirportAdressBaseTransfer, AirportAdressPublished>();
+            CreateMap<AirportAdressReadTransfer, AirportAdressPublished>();
         }
     }
 }
