@@ -21,9 +21,21 @@ namespace Flight.Repositories
     
         public virtual async Task<TEntity> AddAsync(TEntity entity)
         {
-            await _context.Set<TEntity>().AddAsync(entity);
+            var added = await _context.Set<TEntity>().AddAsync(entity);
+
             await _context.SaveChangesAsync();
-    
+
+            var navigationProps = added.CurrentValues.EntityType.GetDeclaredNavigations();
+
+            if (navigationProps != null)
+            {
+                foreach (var prop in navigationProps)
+                {
+                    // load all navigations
+                    await added.Navigation(prop.Name).LoadAsync();
+                }
+            }
+
             return entity;
         }
     

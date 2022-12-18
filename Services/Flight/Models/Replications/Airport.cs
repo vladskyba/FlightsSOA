@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Flight.Models.Replications
 {
@@ -13,6 +12,6 @@ namespace Flight.Models.Replications
 
         public ICollection<Flight> DepartureFlights { get; set; }
 
-        //public ICollection<Flight> ArrivalFlights { get; set; }
+        public ICollection<Flight> ArrivalFlights { get; set; }
     }
 }

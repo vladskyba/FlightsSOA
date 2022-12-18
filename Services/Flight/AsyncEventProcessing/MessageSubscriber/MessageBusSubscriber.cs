@@ -31,12 +31,12 @@ namespace Flight.AsyncEventProcessing.MessageSubscriber
 
         private void InitiallizeRabbitMQ()
         {
+            var port = _configuration["RABBITMQ_PORT"] ?? "5672";
+
             var factory = new ConnectionFactory()
             {
                 HostName = _configuration["RABBITMQ_HOST"] ?? "localhost",
-                Port = int.Parse(_configuration["RABBITMQ_PORT"])
-                //HostName = "11",
-                //Port = 123
+                Port = int.Parse(port)
             };
 
             _connection = factory.CreateConnection();

@@ -8,10 +8,10 @@ namespace Airport.MappingProfiles
     {
         public AirportProfiles()
         {
-            CreateMap<AirportEntity, AirportCreateTransfer>()
+            CreateMap<Models.Airport, AirportCreateTransfer>()
                 .ReverseMap();
 
-            CreateMap<AirportEntity, AirportReadTransfer>()
+            CreateMap<Models.Airport, AirportReadTransfer>()
             .ReverseMap();
 
             CreateMap<AirportAdressBaseTransfer, AirportAddress>()

@@ -11,7 +11,7 @@ namespace Airport.Context
 
         }
 
-        public DbSet<AirportEntity> Airport { get; set; }
+        public DbSet<Models.Airport> Airport { get; set; }
 
         // Apply all of Entities Configurations presented in EntitiesConfigurations folder
         protected override void OnModelCreating(ModelBuilder builder)

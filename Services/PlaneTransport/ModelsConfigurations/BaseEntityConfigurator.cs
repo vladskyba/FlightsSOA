@@ -10,7 +10,7 @@ namespace PlaneTransport.ModelsConfigurations
         public virtual void Configure(EntityTypeBuilder<TEntity> builder)
         {
             builder.Property(b => b.Id)
-                .HasColumnName($"{typeof(TEntity)}_id")
+                .HasColumnName($"{typeof(TEntity).Name.ToLower()}_id")
                 .IsRequired()
                 .ValueGeneratedOnAdd();
         }

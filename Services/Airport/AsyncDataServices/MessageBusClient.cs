@@ -18,13 +18,12 @@ namespace Airport.AsyncDataServices
         public MessageBusClient(IConfiguration configuration)
         {
             _configuration = configuration;
+            var port = _configuration["RABBITMQ_PORT"] ?? "5672";
 
             var factory = new ConnectionFactory()
             {
                 HostName = _configuration["RABBITMQ_HOST"] ?? "localhost",
-                Port = int.Parse(_configuration["RABBITMQ_PORT"])
-                //HostName = "localhost",
-                //Port = 1234
+                Port = int.Parse(port)
             };
 
             try

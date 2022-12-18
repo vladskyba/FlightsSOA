@@ -24,14 +24,20 @@ namespace Flight.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("Flight.Models.Flight_id")
+                        .HasColumnName("flight_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<long>("AirplaneId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("ArrivalAirportId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("ArrivalTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Cost")
+                        .HasColumnType("decimal");
 
                     b.Property<long>("DepartureAirportId")
                         .HasColumnType("bigint");
@@ -40,6 +46,8 @@ namespace Flight.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ArrivalAirportId");
 
                     b.HasIndex("DepartureAirportId");
 
@@ -51,7 +59,7 @@ namespace Flight.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("Flight.Models.Replications.Airport_id")
+                        .HasColumnName("airport_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<long>("AirportAddressId")
@@ -76,7 +84,7 @@ namespace Flight.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("Flight.Models.Replications.AirportAddress_id")
+                        .HasColumnName("airportaddress_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AirportId")
@@ -101,11 +109,21 @@ namespace Flight.Migrations
 
             modelBuilder.Entity("Flight.Models.Flight", b =>
                 {
+                    b.HasOne("Flight.Models.Replications.Airport", "ArrivalAirport")
+                        .WithMany("ArrivalFlights")
+                        .HasForeignKey("ArrivalAirportId")
+                        .HasConstraintName("fk_arrival_airport")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("Flight.Models.Replications.Airport", "DepartureAirport")
                         .WithMany("DepartureFlights")
                         .HasForeignKey("DepartureAirportId")
+                        .HasConstraintName("fk_departure_airport")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("ArrivalAirport");
 
                     b.Navigation("DepartureAirport");
                 });
@@ -123,6 +141,8 @@ namespace Flight.Migrations
 
             modelBuilder.Entity("Flight.Models.Replications.Airport", b =>
                 {
+                    b.Navigation("ArrivalFlights");
+
                     b.Navigation("DepartureFlights");
                 });
 

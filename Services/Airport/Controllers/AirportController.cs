@@ -1,5 +1,4 @@
-﻿using Airport.Models;
-using Airport.Repositories;
+﻿using Airport.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -14,13 +13,13 @@ namespace Airport.Controllers
 {
     public class AirportController : ControllerBase
     {
-        private readonly IGenericRepository<AirportEntity> _airportRepository;
+        private readonly IGenericRepository<Models.Airport> _airportRepository;
 
         private readonly IMessageBusClient _messageBusClient;
 
         private readonly IMapper _mapper;
 
-        public AirportController(IGenericRepository<AirportEntity> airportRepository,
+        public AirportController(IGenericRepository<Models.Airport> airportRepository,
             IMessageBusClient messageBusClient,
             IMapper mapper)
         {
@@ -36,7 +35,7 @@ namespace Airport.Controllers
         [SwaggerResponse(StatusCodes.Status201Created, Type = typeof(AirportReadTransfer))]
         public async Task<IActionResult> CreateAirport([FromBody] AirportCreateTransfer airportDto)
         {
-            var airportModel = _mapper.Map<AirportEntity>(airportDto);
+            var airportModel = _mapper.Map<Models.Airport>(airportDto);
 
             var addedAirport = await _airportRepository.AddAsync(airportModel);
             var airportRepresentation = _mapper.Map<AirportReadTransfer>(addedAirport);
@@ -55,7 +54,7 @@ namespace Airport.Controllers
         [SwaggerResponse(StatusCodes.Status201Created, Type = typeof(AirportReadTransfer))]
         public async Task<IActionResult> UpdateAirport([Required] long airportId, [FromBody] AirportCreateTransfer airportDto)
         {
-            var airportModel = _mapper.Map<AirportEntity>(airportDto);
+            var airportModel = _mapper.Map<Models.Airport>(airportDto);
             airportModel.Id = airportId;
 
             var addedAirport = await _airportRepository.UpdateAsync(airportModel);

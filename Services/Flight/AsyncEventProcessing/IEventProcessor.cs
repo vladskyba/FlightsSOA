@@ -1,7 +1,9 @@
-﻿namespace Flight.AsyncEventProcessing
+﻿using System.Threading.Tasks;
+
+namespace Flight.AsyncEventProcessing
 {
     public interface IEventProcessor
     {
-        public void ProcessEvent(string message);
+        public Task ProcessEvent(string message);
     }
 }

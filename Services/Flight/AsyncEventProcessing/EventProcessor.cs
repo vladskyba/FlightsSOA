@@ -5,6 +5,7 @@ using Flight.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Flight.AsyncEventProcessing
 {
@@ -20,7 +21,7 @@ namespace Flight.AsyncEventProcessing
             _mapper = mapper;
         }
 
-        public void ProcessEvent(string message)
+        public async Task ProcessEvent(string message)
         {
             var eventType = DetermineEvent(message);
 
@@ -29,7 +30,7 @@ namespace Flight.AsyncEventProcessing
             switch (eventType)
             {
                 case EventType.CreatedAirport:
-                    AddAirport(message);
+                    await AddAirport(message);
                     Console.WriteLine("Airport Pushed to database!");
                     break;
                 default:
@@ -37,7 +38,7 @@ namespace Flight.AsyncEventProcessing
             }
         }
 
-        private void AddAirport(string publishedMessage)
+        private async Task AddAirport(string publishedMessage)
         {
             try
             {
@@ -48,7 +49,8 @@ namespace Flight.AsyncEventProcessing
                     var deserrialized = JsonSerializer.Deserialize<AirportPublished>(publishedMessage);
 
                     var airportEntity = _mapper.Map<Airport>(deserrialized);
-                    repository.AddAsync(airportEntity);
+                    airportEntity.Id = 0;
+                    var added = await repository.AddAsync(airportEntity);
                 }
             }
             catch (Exception exception)

@@ -4,9 +4,9 @@ namespace Flight.DataTransfer
 {
     public class FlightBaseTransfer
     {
-        public AirportReadTransfer DepartureAirport { get; set; }
+        public long DepartureAirportId { get; set; }
 
-        public AirportReadTransfer ArrivalAirport { get; set; }
+        public long ArrivalAirportId { get; set; }
 
         public DateTime DepartureTime { get; set; }
 

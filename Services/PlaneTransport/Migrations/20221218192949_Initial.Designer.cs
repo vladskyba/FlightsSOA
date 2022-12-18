@@ -9,7 +9,7 @@ using PlaneTransport.Context;
 namespace PlaneTransport.Migrations
 {
     [DbContext(typeof(PlaneContext))]
-    [Migration("20221217151041_Initial")]
+    [Migration("20221218192949_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace PlaneTransport.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("PlaneTransport.Models.Plane_id")
+                        .HasColumnName("plane_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
@@ -44,7 +44,7 @@ namespace PlaneTransport.Migrations
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasColumnName("PlaneTransport.Models.PlaneSeat_id")
+                        .HasColumnName("planeseat_id")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("IsActive")

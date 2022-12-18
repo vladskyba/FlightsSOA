@@ -10,6 +10,6 @@
 
         public int AirportId { get; set; }
 
-        public virtual AirportEntity Airport { get; set; }
+        public virtual Airport Airport { get; set; }
     }
 }
