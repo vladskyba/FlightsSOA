@@ -27,6 +27,19 @@ services:
     build:
       context: ./Services/PlaneTransport
 
+  flight-service:
+    container_name: flight-service
+    image: flight-service
+    environment:
+      DB_SERVER: "sql-server"
+      SERVICE_NAME: "Flight"
+      RABBITMQ_HOST: "rabbitmq"
+      RABBITMQ_PORT: "5672"
+    ports:
+    - "6003:80"
+    build:
+      context: ./Services/Flight
+
   sql-server:
     container_name: sql-server
     image: mcr.microsoft.com/mssql/server:latest

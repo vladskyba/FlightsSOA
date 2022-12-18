@@ -40,7 +40,7 @@ namespace PlaneTransport
             var port = Configuration["DB_PORT"] ?? "1433";
             var user = Configuration["DB_USER"] ?? "sa";
             var password = Configuration["DB_PASSWORD"] ?? "yourStrong(!)Password";
-            var service = Configuration["SERVICE_NAME"] ?? "Airport";
+            var service = Configuration["SERVICE_NAME"] ?? "Plane";
 
             services.AddDbContext<PlaneContext>(options =>
             {

@@ -9,9 +9,9 @@ namespace Flight.Models
 
         public Airport DepartureAirport { get; set; }
 
-        public long ArrivalAirportId { get; set; }
+        //public long ArrivalAirportId { get; set; }
 
-        public Airport ArrivalAirport { get; set; }
+        //public Airport ArrivalAirport { get; set; }
 
         public DateTime DepartureTime { get; set; }
 
@@ -19,6 +19,6 @@ namespace Flight.Models
 
         public long AirplaneId { get; set; }
 
-        public decimal Cost { get; set; }
+        //public decimal Cost { get; set; }
     }
 }

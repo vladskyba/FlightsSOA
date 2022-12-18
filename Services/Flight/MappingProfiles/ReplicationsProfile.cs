@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Flight.DataTransfer;
+using Flight.DataTransfer.Messaging;
 using Flight.Models.Replications;
 
 namespace Flight.MappingProfiles
@@ -8,11 +9,13 @@ namespace Flight.MappingProfiles
     {
         public ReplicationsProfile()
         {
-            CreateMap<Airport, AirportReadTransfer>()
-                .ReverseMap();
+            CreateMap<Airport, AirportReadTransfer>();
+            CreateMap<AirportAddress, AirportAdressReadTransfer>();
+            
+            CreateMap<AirportPublished, Airport>()
+                .ForMember(dest => dest.ExternalId, opt => opt.MapFrom(src => src.Id));
 
-            CreateMap<AirportAddress, AirportAdressReadTransfer>()
-                .ReverseMap();
+            CreateMap<AirportAdressPublished, AirportAddress>();
         }
     }
 }
