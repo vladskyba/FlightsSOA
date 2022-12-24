@@ -10,8 +10,8 @@ using ServiceRegistry.Context;
 namespace ServiceRegistry.Migrations
 {
     [DbContext(typeof(ServiceRegistryContext))]
-    [Migration("20221224170126_Start")]
-    partial class Start
+    [Migration("20221224191940_Add-Migration Start")]
+    partial class AddMigrationStart
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,10 +23,8 @@ namespace ServiceRegistry.Migrations
 
             modelBuilder.Entity("ServicesRegistry.Models.ServiceSettings", b =>
                 {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<long>("Port")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Entered")
                         .HasColumnType("datetime2");
@@ -34,13 +32,10 @@ namespace ServiceRegistry.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("Port")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("Service")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("Port");
 
                     b.ToTable("ServiceSettings");
                 });

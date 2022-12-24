@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Airplane.Context;
+using Airport.AsyncDataServices;
 
 namespace Airplane
 {
@@ -16,6 +17,9 @@ namespace Airplane
             {
                 database.Database.Migrate();
             }
+
+            var messageBus = app.Services.GetService<IMessageBusClient>();
+            messageBus.RegisterService();
 
             app.Run();
         }

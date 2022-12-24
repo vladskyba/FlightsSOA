@@ -5,38 +5,18 @@ using System.Threading.Tasks;
 using System;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore;
-using ServiceRegistry.Models;
 using ServiceRegistry.Context;
+using ServicesRegistry.Models;
 
 namespace ServicesRegistry.Repositories
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : ServiceSettings
     {
         protected readonly ServiceRegistryContext _context;
     
         public GenericRepository(ServiceRegistryContext context)
         {
             _context = context;
-        }
-    
-        public virtual async Task<TEntity> AddAsync(TEntity entity)
-        {
-            var added = await _context.Set<TEntity>().AddAsync(entity);
-
-            await _context.SaveChangesAsync();
-
-            var navigationProps = added.CurrentValues.EntityType.GetDeclaredNavigations();
-
-            if (navigationProps != null)
-            {
-                foreach (var prop in navigationProps)
-                {
-                    // load all navigations
-                    await added.Navigation(prop.Name).LoadAsync();
-                }
-            }
-
-            return entity;
         }
     
         public async Task<IEnumerable<TEntity>> GetAsync(
@@ -63,29 +43,12 @@ namespace ServicesRegistry.Repositories
     
             return await query.ToListAsync();
         }
-    
-        public virtual async Task<TEntity> UpdateAsync(TEntity entity)
-        {
-            var exist = await _context.Set<TEntity>()
-                                      .AsNoTracking()
-                                      .FirstOrDefaultAsync(x => x.Id == entity.Id);
-    
-            if (exist == null)
-            {
-                return null;
-            }
-    
-            _context.Set<TEntity>().Update(entity);
-            await _context.SaveChangesAsync();
-    
-            return entity;
-        }
 
         public async Task<TEntity> UpsertAsync(TEntity entity)
         {
             var exist = await _context.Set<TEntity>()
                           .AsNoTracking()
-                          .FirstOrDefaultAsync(x => x.Id == entity.Id);
+                          .FirstOrDefaultAsync(x => x.Port == entity.Port);
 
             if (exist == null)
             {

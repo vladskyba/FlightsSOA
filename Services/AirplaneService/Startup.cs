@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Airplane.Context;
 using Airplane.Repositories;
+using Airport.AsyncDataServices;
 
 namespace Airplane
 {
@@ -33,6 +34,8 @@ namespace Airplane
             services.AddControllers();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddSingleton<IMessageBusClient, MessageBusClient>();
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 

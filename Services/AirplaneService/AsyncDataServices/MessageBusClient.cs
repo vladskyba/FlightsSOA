@@ -68,8 +68,6 @@ namespace Airport.AsyncDataServices
                     routingKey: "",
                     basicProperties: null,
                     body: body);
-
-            Console.WriteLine("Message was published!");
         }
 
         public void Dispose()

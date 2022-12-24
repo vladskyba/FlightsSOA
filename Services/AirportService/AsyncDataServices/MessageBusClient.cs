@@ -1,5 +1,5 @@
 ﻿using Airport.DataTransfer.Messaging;
-using AirportService.Settings;
+using AirportService.DataTransfer;
 using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
 using System;
