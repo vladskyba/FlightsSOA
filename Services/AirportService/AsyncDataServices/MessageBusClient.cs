@@ -54,7 +54,7 @@ namespace Airport.AsyncDataServices
 
         public void RegisterService() 
         {
-            var port = _configuration["RABBITMQ_PORT"] ?? "5672";
+            var port = _configuration["SERVICE_PORT"];
 
             var serviceSettings = new ServiceSettings
             {
