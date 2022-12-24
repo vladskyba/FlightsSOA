@@ -13,10 +13,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using PlaneTransport.Context;
-using PlaneTransport.Repositories;
+using Airplane.Context;
+using Airplane.Repositories;
 
-namespace PlaneTransport
+namespace Airplane
 {
     public class Startup
     {
@@ -42,12 +42,12 @@ namespace PlaneTransport
             var password = Configuration["DB_PASSWORD"] ?? "yourStrong(!)Password";
             var service = Configuration["SERVICE_NAME"] ?? "Plane";
 
-            services.AddDbContext<PlaneContext>(options =>
+            services.AddDbContext<AirplaneContext>(options =>
             {
                 options.EnableSensitiveDataLogging();
                 options.UseSqlServer(
                    $"Data Source={server},{port};Initial Catalog={service};User Id={user};Password={password}",
-                   a => a.MigrationsAssembly(typeof(PlaneContext).Assembly.FullName));
+                   a => a.MigrationsAssembly(typeof(AirplaneContext).Assembly.FullName));
             });
 
             services.AddSwaggerGen(c =>

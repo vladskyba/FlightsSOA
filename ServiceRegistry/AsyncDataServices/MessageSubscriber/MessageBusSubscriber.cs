@@ -59,8 +59,6 @@ namespace Flight.AsyncEventProcessing.MessageSubscriber
 
             consumer.Received += (ModuleHandle, ea) =>
             {
-                Console.WriteLine("Flights receives event");
-
                 var body = ea.Body;
                 var notificationMessage = Encoding.UTF8.GetString(body.ToArray());
 

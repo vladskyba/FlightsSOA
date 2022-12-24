@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PlaneTransport.Context;
+using Airplane.Context;
 
-namespace PlaneTransport.Migrations
+namespace Airplane.Migrations
 {
-    [DbContext(typeof(PlaneContext))]
+    [DbContext(typeof(AirplaneContext))]
     [Migration("20221218192949_Initial")]
     partial class Initial
     {

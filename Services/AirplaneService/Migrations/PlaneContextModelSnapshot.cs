@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PlaneTransport.Context;
+using Airplane.Context;
 
-namespace PlaneTransport.Migrations
+namespace Airplane.Migrations
 {
-    [DbContext(typeof(PlaneContext))]
+    [DbContext(typeof(AirplaneContext))]
     partial class PlaneContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

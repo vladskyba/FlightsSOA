@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using PlaneTransport.Repositories;
-using PlaneTransport.Models;
-using PlaneTransport.DataTransfer;
+using Airplane.Repositories;
+using Airplane.Models;
+using Airplane.DataTransfer;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace PlaneTransport.Controllers
+namespace Airplane.Controllers
 {
     public class PlaneController : ControllerBase
     {

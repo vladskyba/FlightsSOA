@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using PlaneTransport.Models;
+using Airplane.Models;
 
-namespace PlaneTransport.Context
+namespace Airplane.Context
 {
-    public class PlaneContext : DbContext
+    public class AirplaneContext : DbContext
     {
-        public PlaneContext(DbContextOptions<PlaneContext> options) : base(options)
+        public AirplaneContext(DbContextOptions<AirplaneContext> options) : base(options)
         {
 
         }
@@ -15,7 +15,6 @@ namespace PlaneTransport.Context
 
         public DbSet<PlaneSeat> PlaneSeat { get; set; }
 
-        // Apply all of Entities Configurations presented in EntitiesConfigurations folder
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

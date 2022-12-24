@@ -1,4 +1,4 @@
-﻿namespace PlaneTransport.Enums
+﻿namespace Airplane.Enums
 {
     public enum PlaneType
     {

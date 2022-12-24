@@ -1,4 +1,4 @@
-﻿namespace AirportService.Settings
+﻿namespace AirportService.DataTransfer
 {
     public class ServiceSettings
     {

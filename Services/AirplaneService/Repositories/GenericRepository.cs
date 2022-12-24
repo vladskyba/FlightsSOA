@@ -5,16 +5,16 @@ using System.Threading.Tasks;
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using PlaneTransport.Models;
-using PlaneTransport.Context;
+using Airplane.Models;
+using Airplane.Context;
 
-namespace PlaneTransport.Repositories
+namespace Airplane.Repositories
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
     {
-        protected readonly PlaneContext _context;
+        protected readonly AirplaneContext _context;
     
-        public GenericRepository(PlaneContext context)
+        public GenericRepository(AirplaneContext context)
         {
             _context = context;
         }

@@ -1,4 +1,4 @@
-﻿namespace PlaneTransport.Models
+﻿namespace Airplane.Models
 {
     public class PlaneSeat : BaseEntity
     {

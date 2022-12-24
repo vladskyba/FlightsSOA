@@ -1,4 +1,4 @@
-﻿namespace PlaneTransport.DataTransfer
+﻿namespace Airplane.DataTransfer
 {
     public class PlaneSeatReadTransfer : PlaneSeatBaseTransfer
     {

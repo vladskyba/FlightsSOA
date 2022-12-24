@@ -1,7 +1,7 @@
-﻿using PlaneTransport.Enums;
+﻿using Airplane.Enums;
 using System.Collections.Generic;
 
-namespace PlaneTransport.Models
+namespace Airplane.Models
 {
     public class Plane : BaseEntity
     {

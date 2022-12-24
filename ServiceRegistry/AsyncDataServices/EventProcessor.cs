@@ -30,6 +30,12 @@ namespace ServiceRegistry.AsyncDataServices
                     Console.WriteLine("Airport service registered!");
                     break;
                 }
+                case "airplane-service.register":
+                {
+                    await RegisterService(publishedSettings, ServiceType.Airplane);
+                    Console.WriteLine("Airplane service registered!");
+                    break;
+                }
                 default:
                     break;
             }

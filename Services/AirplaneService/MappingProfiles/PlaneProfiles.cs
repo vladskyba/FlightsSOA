@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using PlaneTransport.DataTransfer;
-using PlaneTransport.Models;
+using Airplane.DataTransfer;
+using Airplane.Models;
 
-namespace PlaneTransport.MappingProfiles
+namespace Airplane.MappingProfiles
 {
     public class PlaneProfiles : Profile
     {
