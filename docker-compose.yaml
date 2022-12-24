@@ -7,21 +7,38 @@ services:
     environment:
       DB_SERVER: "sql-server"
       SERVICE_NAME: "Airport"
+      RABBITMQ_HOST: "rabbitmq"
+      RABBITMQ_PORT: "5672"
     ports:
     - "6001:80"
     build:
-      context: ./Services/Airport
+      context: ./Services/AirportService
 
-  plane-service:
-    container_name: plane-service
-    image: plane-service
+  airplane-service:
+    container_name: airplane-service
+    image: airplane-service
     environment:
       DB_SERVER: "sql-server"
-      SERVICE_NAME: "Plane"
+      SERVICE_NAME: "Airplane"
+      RABBITMQ_HOST: "rabbitmq"
+      RABBITMQ_PORT: "5672"
     ports:
     - "6002:80"
     build:
-      context: ./Services/PlaneTransport
+      context: ./Services/AirplaneService
+
+  flight-service:
+    container_name: flight-service
+    image: flight-service
+    environment:
+      DB_SERVER: "sql-server"
+      SERVICE_NAME: "Flight"
+      RABBITMQ_HOST: "rabbitmq"
+      RABBITMQ_PORT: "5672"
+    ports:
+    - "6003:80"
+    build:
+      context: ./Services/FlightService
 
   sql-server:
     container_name: sql-server
@@ -32,3 +49,16 @@ services:
       MSSQL_PID: Express
     ports:
       - "1434:1433"
+
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmqdata:/var/lib/rabbitmq
+    hostname: rabbitmq
+
+volumes:
+  rabbitmqdata:
