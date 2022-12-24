@@ -42,7 +42,7 @@ namespace Airport.Controllers
             var airportPublishing = _mapper.Map<AirportPublished>(airportRepresentation);
             airportPublishing.Event = "airport.pushed";
 
-            _messageBusClient.PuslishCreatedAirport(airportPublishing);
+            _messageBusClient.PuslishAirport(airportPublishing);
 
             return Ok(airportRepresentation);
         }

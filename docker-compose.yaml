@@ -1,6 +1,20 @@
 version: "3.9"
 
 services:
+
+  service-registry:
+    container_name:  service-registry
+    image:  service-registry
+    environment:
+      DB_SERVER: "sql-server"
+      SERVICE_NAME: "ServiceRegistry"
+      RABBITMQ_HOST: "rabbitmq"
+      RABBITMQ_PORT: "5672"
+    ports:
+    - "6000:80"
+    build:
+      context: ./ServiceRegistry
+
   airport-service:
     container_name: airport-service
     image: airport-service

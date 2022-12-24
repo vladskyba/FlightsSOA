@@ -1,6 +1,6 @@
 ﻿namespace ServicesRegistry.Enums
 {
-    public enum Service
+    public enum ServiceType
     {
         Airport,
         Airplane,
