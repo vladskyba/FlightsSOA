@@ -1,3 +1,4 @@
+using Flight.AsyncDataServices;
 using Flight.AsyncEventProcessing;
 using Flight.AsyncEventProcessing.MessageSubscriber;
 using Flight.Context;
@@ -31,6 +32,8 @@ namespace Flight
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddSingleton<IEventProcessor, EventProcessor>();
+
+            services.AddSingleton<IMessageBusClient, MessageBusClient>();
 
             services.AddHostedService<MessageBusSubscriber>();
 

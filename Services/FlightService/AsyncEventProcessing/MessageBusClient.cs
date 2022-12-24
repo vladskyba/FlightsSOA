@@ -1,12 +1,11 @@
-﻿using Airport.DataTransfer.Messaging;
-using AirportService.DataTransfer;
+﻿using AirportService.DataTransfer;
 using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
 using System;
 using System.Text;
 using System.Text.Json;
 
-namespace Airport.AsyncDataServices
+namespace Flight.AsyncDataServices
 {
     public class MessageBusClient : IMessageBusClient, IDisposable
     {
@@ -42,25 +41,15 @@ namespace Airport.AsyncDataServices
             }
         }
 
-        public void PuslishAirport(AirportPublished airportPublished)
-        {
-            var message = JsonSerializer.Serialize(airportPublished);
-
-            if (_connection.IsOpen)
-            {
-                SendMessage(message);
-            }
-        }
-
         public void RegisterService() 
         {
             var port = _configuration["SERVICE_PORT"];
 
             var serviceSettings = new ServiceSettings
             {
-                Name = _configuration["SERVICE_NAME"] ?? "Airport",
+                Name = _configuration["SERVICE_NAME"] ?? "Flight",
                 Port = int.Parse(port),
-                Event = "airport-service.register"
+                Event = "flight-service.register"
             };
 
             var message = JsonSerializer.Serialize(serviceSettings);

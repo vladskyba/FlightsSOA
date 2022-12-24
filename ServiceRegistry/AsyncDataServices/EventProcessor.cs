@@ -6,6 +6,7 @@ using ServicesRegistry.Repositories;
 using System;
 using System.Text.Json;
 using System.Threading.Tasks;
+using static Humanizer.In;
 
 namespace ServiceRegistry.AsyncDataServices
 {
@@ -34,6 +35,12 @@ namespace ServiceRegistry.AsyncDataServices
                 {
                     await RegisterService(publishedSettings, ServiceType.Airplane);
                     Console.WriteLine("Airplane service registered!");
+                    break;
+                }
+                case "flight-service.register":
+                {
+                    await RegisterService(publishedSettings, ServiceType.Flight);
+                    Console.WriteLine("Flight service registered!");
                     break;
                 }
                 default:

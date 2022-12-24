@@ -1,3 +1,4 @@
+using Flight.AsyncDataServices;
 using Flight.Context;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -16,6 +17,9 @@ namespace Flight
             {
                 database.Database.Migrate();
             }
+
+            var messageBus = app.Services.GetService<IMessageBusClient>();
+            messageBus.RegisterService();
 
             app.Run();
         }
