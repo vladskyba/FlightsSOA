@@ -1,6 +1,6 @@
-﻿using PlaneTransport.Enums;
+﻿using Airplane.Enums;
 
-namespace PlaneTransport.DataTransfer
+namespace Airplane.DataTransfer
 {
     public class PlaneBaseTransfer
     {

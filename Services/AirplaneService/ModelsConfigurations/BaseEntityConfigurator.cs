@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using PlaneTransport.Models;
+using Airplane.Models;
 
-namespace PlaneTransport.ModelsConfigurations
+namespace Airplane.ModelsConfigurations
 {
     internal class BaseEntityConfigurator<TEntity> : IEntityTypeConfiguration<TEntity>
         where TEntity : BaseEntity

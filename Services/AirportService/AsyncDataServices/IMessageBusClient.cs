@@ -4,6 +4,8 @@ namespace Airport.AsyncDataServices
 {
     public interface IMessageBusClient
     {
-        void PuslishCreatedAirport(AirportPublished airportPublished);
+        void PuslishAirport(AirportPublished airportPublished);
+
+        void RegisterService();
     }
 }

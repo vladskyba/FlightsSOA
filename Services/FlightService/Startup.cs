@@ -1,3 +1,4 @@
+using Flight.AsyncDataServices;
 using Flight.AsyncEventProcessing;
 using Flight.AsyncEventProcessing.MessageSubscriber;
 using Flight.Context;
@@ -22,7 +23,6 @@ namespace Flight
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
@@ -32,6 +32,8 @@ namespace Flight
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddSingleton<IEventProcessor, EventProcessor>();
+
+            services.AddSingleton<IMessageBusClient, MessageBusClient>();
 
             services.AddHostedService<MessageBusSubscriber>();
 

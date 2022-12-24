@@ -1,22 +1,16 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using PlaneTransport.Context;
-using PlaneTransport.Repositories;
+using Airplane.Context;
+using Airplane.Repositories;
+using Airport.AsyncDataServices;
 
-namespace PlaneTransport
+namespace Airplane
 {
     public class Startup
     {
@@ -27,12 +21,13 @@ namespace PlaneTransport
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddSingleton<IMessageBusClient, MessageBusClient>();
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
@@ -42,12 +37,12 @@ namespace PlaneTransport
             var password = Configuration["DB_PASSWORD"] ?? "yourStrong(!)Password";
             var service = Configuration["SERVICE_NAME"] ?? "Plane";
 
-            services.AddDbContext<PlaneContext>(options =>
+            services.AddDbContext<AirplaneContext>(options =>
             {
                 options.EnableSensitiveDataLogging();
                 options.UseSqlServer(
                    $"Data Source={server},{port};Initial Catalog={service};User Id={user};Password={password}",
-                   a => a.MigrationsAssembly(typeof(PlaneContext).Assembly.FullName));
+                   a => a.MigrationsAssembly(typeof(AirplaneContext).Assembly.FullName));
             });
 
             services.AddSwaggerGen(c =>
@@ -56,7 +51,6 @@ namespace PlaneTransport
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

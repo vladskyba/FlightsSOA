@@ -2,9 +2,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PlaneTransport.Context;
+using Airplane.Context;
+using Airport.AsyncDataServices;
 
-namespace PlaneTransport
+namespace Airplane
 {
     public class Program
     {
@@ -12,10 +13,13 @@ namespace PlaneTransport
         {
             var app = CreateHostBuilder(args).Build();
 
-            using (var database = app.Services.CreateScope().ServiceProvider.GetService<PlaneContext>())
+            using (var database = app.Services.CreateScope().ServiceProvider.GetService<AirplaneContext>())
             {
                 database.Database.Migrate();
             }
+
+            var messageBus = app.Services.GetService<IMessageBusClient>();
+            messageBus.RegisterService();
 
             app.Run();
         }

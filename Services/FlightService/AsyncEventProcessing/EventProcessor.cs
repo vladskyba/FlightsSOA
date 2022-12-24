@@ -31,7 +31,7 @@ namespace Flight.AsyncEventProcessing
             {
                 case EventType.AirportPushed:
                     await AddAirport(message);
-                    Console.WriteLine("Airport Pushed to database!");
+                    Console.WriteLine("Airport pushed to database!");
                     break;
                 default:
                     break;

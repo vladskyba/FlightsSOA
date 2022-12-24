@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PlaneTransport.DataTransfer
+namespace Airplane.DataTransfer
 {
     public class PlaneReadTransfer : PlaneBaseTransfer
     {

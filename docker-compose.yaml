@@ -1,18 +1,24 @@
 version: "3.9"
 
 services:
+
   airport-service:
     container_name: airport-service
     image: airport-service
     environment:
       DB_SERVER: "sql-server"
       SERVICE_NAME: "Airport"
+      SERVICE_PORT: "6001"
       RABBITMQ_HOST: "rabbitmq"
       RABBITMQ_PORT: "5672"
     ports:
     - "6001:80"
     build:
       context: ./Services/AirportService
+    depends_on:
+      - sql-server
+      - rabbitmq
+      - service-registry
 
   airplane-service:
     container_name: airplane-service
@@ -20,12 +26,17 @@ services:
     environment:
       DB_SERVER: "sql-server"
       SERVICE_NAME: "Airplane"
+      SERVICE_PORT: "6002"
       RABBITMQ_HOST: "rabbitmq"
       RABBITMQ_PORT: "5672"
     ports:
     - "6002:80"
     build:
       context: ./Services/AirplaneService
+    depends_on:
+      - sql-server
+      - rabbitmq
+      - service-registry
 
   flight-service:
     container_name: flight-service
@@ -33,12 +44,33 @@ services:
     environment:
       DB_SERVER: "sql-server"
       SERVICE_NAME: "Flight"
+      SERVICE_PORT: "6003"
       RABBITMQ_HOST: "rabbitmq"
       RABBITMQ_PORT: "5672"
     ports:
     - "6003:80"
     build:
       context: ./Services/FlightService
+    depends_on:
+      - sql-server
+      - rabbitmq
+      - service-registry
+
+  service-registry:
+    container_name:  service-registry
+    image:  service-registry
+    environment:
+      DB_SERVER: "sql-server"
+      SERVICE_NAME: "ServiceRegistry"
+      RABBITMQ_HOST: "rabbitmq"
+      RABBITMQ_PORT: "5672"
+    ports:
+    - "6000:80"
+    build:
+      context: ./ServiceRegistry
+    depends_on:
+      - sql-server
+      - rabbitmq
 
   sql-server:
     container_name: sql-server
