@@ -12,20 +12,20 @@ services:
     ports:
     - "6001:80"
     build:
-      context: ./Services/Airport
+      context: ./Services/AirportService
 
-  plane-service:
-    container_name: plane-service
-    image: plane-service
+  airplane-service:
+    container_name: airplane-service
+    image: airplane-service
     environment:
       DB_SERVER: "sql-server"
-      SERVICE_NAME: "Plane"
+      SERVICE_NAME: "Airplane"
       RABBITMQ_HOST: "rabbitmq"
       RABBITMQ_PORT: "5672"
     ports:
     - "6002:80"
     build:
-      context: ./Services/PlaneTransport
+      context: ./Services/AirplaneService
 
   flight-service:
     container_name: flight-service
@@ -38,7 +38,7 @@ services:
     ports:
     - "6003:80"
     build:
-      context: ./Services/Flight
+      context: ./Services/FlightService
 
   sql-server:
     container_name: sql-server
