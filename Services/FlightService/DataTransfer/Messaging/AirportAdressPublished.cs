@@ -1,4 +1,4 @@
-﻿namespace Flight.DataTransfer.Messaging
+﻿namespace FlightService.DataTransfer.Messaging
 {
     public class AirportAdressPublished : PublishedBase
     {

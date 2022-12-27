@@ -1,11 +1,11 @@
-using Flight.AsyncDataServices;
-using Flight.Context;
+using FlightService.AsyncDataServices;
+using FlightService.Context;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Flight
+namespace FlightService
 {
     public class Program
     {

@@ -1,8 +1,8 @@
-﻿using Flight.Models;
+﻿using FlightService.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 
-namespace Flight.ModelsConfigurations
+namespace FlightService.ModelsConfigurations
 {
     public class BaseEntityConfigurator<TEntity> : IEntityTypeConfiguration<TEntity>
         where TEntity : BaseEntity

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Flight.DataTransfer
+namespace FlightService.DataTransfer
 {
     public class FlightBaseTransfer
     {

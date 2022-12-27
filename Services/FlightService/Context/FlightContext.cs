@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 
-namespace Flight.Context
+namespace FlightService.Context
 {
     public class FlightContext : DbContext
     {

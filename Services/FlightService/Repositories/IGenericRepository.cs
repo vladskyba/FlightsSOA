@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System;
 using Microsoft.EntityFrameworkCore.Query;
-using Flight.Models;
+using FlightService.Models;
 
-namespace Flight.Repositories
+namespace FlightService.Repositories
 {
     public interface IGenericRepository<TEntity> where TEntity : BaseEntity
     {

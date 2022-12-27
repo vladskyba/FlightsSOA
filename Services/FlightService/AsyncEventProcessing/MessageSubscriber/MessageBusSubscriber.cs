@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Flight.AsyncEventProcessing.MessageSubscriber
+namespace FlightService.AsyncEventProcessing.MessageSubscriber
 {
     public class MessageBusSubscriber : BackgroundService
     {

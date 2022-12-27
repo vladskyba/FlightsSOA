@@ -1,8 +1,8 @@
-using Flight.AsyncDataServices;
-using Flight.AsyncEventProcessing;
-using Flight.AsyncEventProcessing.MessageSubscriber;
-using Flight.Context;
-using Flight.Repositories;
+using FlightService.AsyncDataServices;
+using FlightService.AsyncEventProcessing;
+using FlightService.AsyncEventProcessing.MessageSubscriber;
+using FlightService.Context;
+using FlightService.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 
-namespace Flight
+namespace FlightService
 {
     public class Startup
     {

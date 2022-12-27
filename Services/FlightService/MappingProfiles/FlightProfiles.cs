@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Flight.DataTransfer;
+using FlightService.DataTransfer;
 
-namespace Flight.MappingProfiles
+namespace FlightService.MappingProfiles
 {
     public class FlightProfiles : Profile
     {

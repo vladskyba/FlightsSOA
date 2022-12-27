@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using Flight.Models;
+using FlightService.Models;
 using System;
-using Flight.Context;
+using FlightService.Context;
 
-namespace Flight.Repositories
+namespace FlightService.Repositories
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
     {

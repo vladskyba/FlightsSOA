@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Flight.DataTransfer;
-using Flight.DataTransfer.Messaging;
-using Flight.Models.Replications;
+using FlightService.DataTransfer;
+using FlightService.DataTransfer.Messaging;
+using FlightService.Models.Replications;
 
-namespace Flight.MappingProfiles
+namespace FlightService.MappingProfiles
 {
     public class ReplicationsProfile : Profile
     {

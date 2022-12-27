@@ -1,4 +1,4 @@
-﻿namespace Flight.DataTransfer
+﻿namespace FlightService.DataTransfer
 {
     public class FlightReadTransfer
     {

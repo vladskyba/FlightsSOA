@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Flight.ModelsConfigurations
+namespace FlightService.ModelsConfigurations
 {
     public static class ModelConfiguratorExstension
     {

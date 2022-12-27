@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Flight.AsyncEventProcessing
+namespace FlightService.AsyncEventProcessing
 {
     public interface IEventProcessor
     {
