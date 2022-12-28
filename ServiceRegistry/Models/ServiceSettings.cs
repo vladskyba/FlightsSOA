@@ -13,6 +13,8 @@ namespace ServicesRegistry.Models
 
         public string Name { get; set; }
 
+        public string Host { get; set; }
+
         public ServiceType Service { get; set; }
 
         public DateTime Entered { get; set; }

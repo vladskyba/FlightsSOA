@@ -63,7 +63,12 @@ namespace ReservationService.Repositories
     
             return await query.ToListAsync();
         }
-    
+
+        public Task<TEntity> GetByIdAsync(long id)
+        {
+            return _context.Set<TEntity>().FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public virtual async Task<TEntity> UpdateAsync(TEntity entity)
         {
             var exist = await _context.Set<TEntity>()

@@ -25,6 +25,13 @@ namespace FlightService
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => options.AddPolicy("FlightCorsPolicy", build =>
+            {
+                build.WithOrigins("http://localhost:8080")
+                     .AllowAnyMethod()
+                     .AllowAnyHeader();
+            }));
+
             services.AddControllers();
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -69,6 +76,8 @@ namespace FlightService
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Flight v1"));
 
             app.UseHttpsRedirection();
+
+            app.UseCors("FlightCorsPolicy");
 
             app.UseRouting();
 

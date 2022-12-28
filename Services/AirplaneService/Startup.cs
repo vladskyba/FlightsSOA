@@ -23,6 +23,13 @@ namespace Airplane
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => options.AddPolicy("AirplaneCorsPolicy", build =>
+            {
+                build.WithOrigins("http://localhost:8080")
+                     .AllowAnyMethod()
+                     .AllowAnyHeader();
+            }));
+
             services.AddControllers();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -64,6 +71,8 @@ namespace Airplane
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("AirplaneCorsPolicy");
 
             app.UseAuthorization();
 

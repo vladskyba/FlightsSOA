@@ -8,6 +8,8 @@ namespace ReservationService.DateTransfer
     {
         public long FlightId { get; set; }
 
+        public long UserId { get; set; }
+
         public DateTime ReservationDate { get; set; }
 
         public string Email { get; set; }

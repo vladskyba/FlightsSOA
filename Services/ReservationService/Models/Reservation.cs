@@ -15,6 +15,8 @@ namespace ReservationService.Models
 
         public long FlightId { get; set; }
 
+        public long UserId { get; set; }
+
         public Flight Flight { get; set; }
 
         public ICollection<ReservationTicket> Tickets { get; set; }

@@ -15,6 +15,8 @@ namespace ReservationService.Repositories
                    Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null,
                    Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null);
 
+        Task<TEntity> GetByIdAsync(long id);
+
         Task<TEntity> AddAsync(TEntity entity);
 
         Task<TEntity> UpdateAsync(TEntity entity);

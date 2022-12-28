@@ -11,6 +11,7 @@ using ReservationService.AsyncEventProcessing.MessageSubscriber;
 using ReservationService.AsyncEventProcessing;
 using ReservationService.Repositories;
 using ReservationService.Context;
+using System.Text.Json.Serialization;
 
 namespace ReservationService
 {
@@ -25,7 +26,11 @@ namespace ReservationService
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.WriteIndented = true;
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 

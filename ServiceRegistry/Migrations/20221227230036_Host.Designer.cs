@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServiceRegistry.Context;
 
 namespace ServiceRegistry.Migrations
 {
     [DbContext(typeof(ServiceRegistryContext))]
-    partial class ServiceRegistryContextModelSnapshot : ModelSnapshot
+    [Migration("20221227230036_Host")]
+    partial class Host
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
