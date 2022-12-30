@@ -26,6 +26,13 @@ namespace ReservationService
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => options.AddPolicy("ReservationCorsPolicy", build =>
+            {
+                build.WithOrigins("http://localhost:8080")
+                     .AllowAnyMethod()
+                     .AllowAnyHeader();
+            }));
+
             services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.WriteIndented = true;
@@ -71,6 +78,8 @@ namespace ReservationService
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ReservationService v1"));
+
+            app.UseCors("ReservationCorsPolicy");
 
             app.UseHttpsRedirection();
 

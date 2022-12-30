@@ -11,7 +11,7 @@
         <div class="col-lg-4">
             <div class="bg-white text-left">
                 <p1>Створити авіарейс</p1>
-                <form @submit.prevent="createStudent">
+                <form @submit.prevent="createFlight">
                     <div class="form-group">
                         <p class="bottomn">Виберіть літак</p>
                        <Select2 v-model="information.airplaneId" :options="this.airplanes" :settings=" {width: '100%' }" />
@@ -51,7 +51,7 @@
 import Modal from './Modal.vue';
 
 export default {
-  name: 'Student',
+  name: 'Flight',
   components: {
     Modal
   },
@@ -75,13 +75,13 @@ export default {
   created(){
     this.$load(async() => {
         this.airports = (await this.$api.airport.getAll()).data.map( item =>
-        ( { id: item.id, text: [item.name, item.airportAddress.city, item.airportAddress.zip].join(', ') } ));
+        ( { id: item.id, text: [item.name, item.airportAddress.country, item.airportAddress.city].join(', ') } ));
         
         this.airplanes = (await this.$api.airplane.getAll()).data.map( item => ( { id: item.id, text: item.name } ));
     })
   },
   methods: {
-    async createStudent() {
+    async createFlight() {
         try {
             console.log(this.information)
 

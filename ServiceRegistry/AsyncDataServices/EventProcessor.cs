@@ -43,6 +43,18 @@ namespace ServiceRegistry.AsyncDataServices
                     Console.WriteLine("Flight service registered!");
                     break;
                 }
+                case "reservation-service.register":
+                {
+                    await RegisterService(publishedSettings, ServiceType.Reservation);
+                    Console.WriteLine("Reservation service registered!");
+                    break;
+                }
+                case "identity-service.register":
+                {
+                    await RegisterService(publishedSettings, ServiceType.Identity);
+                    Console.WriteLine("Identity service registered!");
+                    break;
+                }
                 default:
                     break;
             }

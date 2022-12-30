@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -45,6 +46,26 @@ namespace FlightService.Controllers
             _messageBusClient.PushMessage(readFlight, "flight.created");
 
             return Ok(readFlight);
+        }
+
+        [HttpPost("searchFlights")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerResponse(StatusCodes.Status201Created, Type = typeof(FlightReadTransfer))]
+        public async Task<IActionResult> CreateFlight([FromBody] SearchParameters searchParameters)
+        {
+            var retrievedFlights = await _flightRepository.GetAsync(
+                x => (searchParameters.DepartureAirportId == null || (x.DepartureAirportId == searchParameters.DepartureAirportId))
+                      && (searchParameters.ArrivalAirportId == null || (x.ArrivalAirportId == searchParameters.ArrivalAirportId)),
+                i => i.Include(p => p.DepartureAirport)
+                    .ThenInclude(i => i.AirportAddress)
+                    .Include(p => p.ArrivalAirport)
+                    .ThenInclude(a => a.AirportAddress));
+           
+            var searchedFlights = _mapper.Map<IEnumerable<FlightReadTransfer>>(retrievedFlights);
+
+            return Ok(searchedFlights);
         }
     }
 }

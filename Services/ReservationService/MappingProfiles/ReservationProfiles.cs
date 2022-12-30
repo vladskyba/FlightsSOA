@@ -2,7 +2,7 @@
 using ReservationService.DateTransfer;
 using ReservationService.Models;
 
-namespace FlightService.MappingProfiles
+namespace ReservationService.MappingProfiles
 {
     public class ReservationProfiles : Profile
     {

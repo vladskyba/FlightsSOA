@@ -1,11 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ReservationService.DateTransfer;
 using ReservationService.Enums;
 using ReservationService.Models;
 using ReservationService.Repositories;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -34,6 +36,7 @@ namespace ReservationService.Controllers
         public async Task<IActionResult> CreateReservation([FromBody] ReservationCreateTransfer reservationDto)
         {
             var reservationModel = _mapper.Map<Reservation>(reservationDto);
+            reservationModel.ReservationDate = DateTime.Now;
             var addedReservation = await _reservationRepository.AddAsync(reservationModel);
 
             return Ok(_mapper.Map<ReservationReadTransfer>(addedReservation));
@@ -61,7 +64,14 @@ namespace ReservationService.Controllers
         [SwaggerResponse(StatusCodes.Status201Created, Type = typeof(ReservationReadTransfer))]
         public async Task<IActionResult> GetReservationByUser([Required] long userId)
         {
-            var reservations = await _reservationRepository.GetAsync(x => x.Id == userId);
+            var reservations = await _reservationRepository.GetAsync(x => x.UserId == userId,
+                i => i.Include(x => x.Flight)
+                    .ThenInclude(x => x.DepartureAirport)
+                    .ThenInclude(x => x.AirportAddress)
+                .Include(x => x.Flight)
+                    .ThenInclude(x => x.ArrivalAirport)
+                    .ThenInclude(x => x.AirportAddress)
+                .Include(x => x.Tickets));
             return Ok(_mapper.Map<IEnumerable<ReservationReadTransfer>>(reservations));
         }
 
@@ -83,11 +93,19 @@ namespace ReservationService.Controllers
         [SwaggerResponse(StatusCodes.Status201Created, Type = typeof(ReservationReadTransfer))]
         public async Task<IActionResult> SearchReservations(string? documentIdentifier, string? personName, string? personLastName, string? personSurname)
         {
-            var reservation = await _reservationRepository.GetAsync(x => 
+            var reservation = await _reservationRepository.GetAsync(x =>
                 (documentIdentifier == null || x.Tickets.Any(x => x.DocumentIdentifier == documentIdentifier)
              && (personName == null || x.Tickets.Any(x => x.PersonName == personName)
              && (personLastName == null || x.Tickets.Any(x => x.PersonLastName == personLastName)
-             && (personSurname == null || x.Tickets.Any(x => x.PersonSurname == personSurname))))));
+             && (personSurname == null || x.Tickets.Any(x => x.PersonSurname == personSurname))))),
+
+             i => i.Include(x => x.Flight)
+                    .ThenInclude(x => x.DepartureAirport)
+                    .ThenInclude(x => x.AirportAddress)
+                .Include(x => x.Flight)
+                    .ThenInclude(x => x.ArrivalAirport)
+                    .ThenInclude(x => x.AirportAddress)
+                .Include(x => x.Tickets));
 
             return Ok(_mapper.Map<IEnumerable<ReservationReadTransfer>>(reservation));
         }

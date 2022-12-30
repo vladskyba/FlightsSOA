@@ -1,4 +1,4 @@
-﻿using ReservationService.Enums;
+﻿using ReservationService.DataTransfer;
 using System;
 using System.Collections.Generic;
 
@@ -15,5 +15,7 @@ namespace ReservationService.DateTransfer
         public string Email { get; set; }
 
         public ICollection<TicketReadTransfer> Tickets { get; set; }
+
+        public FlightReadTransfer Flight { get; set; }
     }
 }

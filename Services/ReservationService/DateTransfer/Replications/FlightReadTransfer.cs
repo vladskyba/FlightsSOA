@@ -1,4 +1,4 @@
-﻿namespace FlightService.DataTransfer
+﻿namespace ReservationService.DataTransfer
 {
     public class FlightReadTransfer : FlightBaseTransfer
     {

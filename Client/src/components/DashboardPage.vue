@@ -1,7 +1,6 @@
 <template>
     <section class="container">
-    <button id="show-modal" class="btn btn-dark righter" @click="student">Створити Студента</button>
-    <button id="show-modal" class="btn btn-dark righter" @click="teacher">Створити Викладача</button>
+    <button id="show-modal" class="btn btn-dark righter" @click="flight">Створити Авіарейс</button>
     <button id="show-modal" class="btn btn-dark" @click="logout">Вийти</button>
 
   </section>
@@ -27,9 +26,6 @@ export default {
     },
     flight(){
       this.$router.push('/flight');
-    },
-    teacher(){
-      this.$router.push('/teacher');
     }
   }
 }

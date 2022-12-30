@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
 import DashboardPage from '../components/DashboardPage.vue'
 import LoginPage from '../components/LoginPage.vue'
-import TeacherInsert from '../components/TeacherInsert.vue'
-import StudentInsert from '../components/FlightInsert.vue'
-
+import FlightInsert from '../components/FlightInsert.vue'
+import FlightSearch from '../components/SearchPage.vue'
+import ReservationInsert from '../components/ReservationInsert.vue'
+import ReservationsPage from '../components/ReservationsPage.vue'
 
 export default createRouter({
     history: createWebHistory(),
@@ -19,14 +20,23 @@ export default createRouter({
           alias: '/' 
         },
         { 
-          path: '/student',
-          name: 'student-insert', 
-          component: StudentInsert
+          path: '/flight',
+          name: 'flight-insert', 
+          component: FlightInsert
         },
-        { 
-          path: '/teacher',
-          name: 'teacher-insert', 
-          component: TeacherInsert
+        { path: '/flightsSearch',
+        name: 'flights-search',
+        component: FlightSearch
+        },
+        {
+          path: '/createReservation/:id',
+          name: 'reservation-insert',
+          component: ReservationInsert
+        },
+        {
+          path: '/reservations',
+          name: 'reservations',
+          component: ReservationsPage
         }
     ]
 })
