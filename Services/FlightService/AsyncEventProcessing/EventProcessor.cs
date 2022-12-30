@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using Flight.DataTransfer.Messaging;
-using Flight.Models.Replications;
-using Flight.Repositories;
+using FlightService.DataTransfer.Messaging;
+using FlightService.Models.Replications;
+using FlightService.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Flight.AsyncEventProcessing
+namespace FlightService.AsyncEventProcessing
 {
     public class EventProcessor : IEventProcessor
     {

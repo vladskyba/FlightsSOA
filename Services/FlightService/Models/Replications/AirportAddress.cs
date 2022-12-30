@@ -1,4 +1,4 @@
-﻿namespace Flight.Models.Replications
+﻿namespace FlightService.Models.Replications
 {
     public class AirportAddress : BaseEntity
     {

@@ -8,6 +8,8 @@ using AutoMapper;
 using System.ComponentModel.DataAnnotations;
 using Airport.AsyncDataServices;
 using Airport.DataTransfer.Messaging;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace Airport.Controllers
 {
@@ -60,6 +62,17 @@ namespace Airport.Controllers
             var addedAirport = await _airportRepository.UpdateAsync(airportModel);
             
             return Ok(_mapper.Map<AirportReadTransfer>(addedAirport));
+        }
+
+        [HttpGet("getAll")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerResponse(StatusCodes.Status201Created, Type = typeof(AirportReadTransfer))]
+        public async Task<IActionResult> GetReservationByUser()
+        {
+            var airports = await _airportRepository.GetAsync(null, i => i.Include(a => a.AirportAddress));
+            return Ok(_mapper.Map<IEnumerable<AirportReadTransfer>>(airports));
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using Flight.Models.Replications;
+﻿using FlightService.Models.Replications;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Flight.ModelsConfigurations
+namespace FlightService.ModelsConfigurations
 {
     internal class AirportEntityConfigurator : ReplicationBaseConfigurator<Airport>
     {

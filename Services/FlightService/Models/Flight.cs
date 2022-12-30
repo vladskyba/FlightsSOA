@@ -1,7 +1,7 @@
-﻿using Flight.Models.Replications;
+﻿using FlightService.Models.Replications;
 using System;
 
-namespace Flight.Models
+namespace FlightService.Models
 {
     public class Flight : BaseEntity
     {

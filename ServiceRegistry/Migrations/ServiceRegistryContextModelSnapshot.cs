@@ -27,6 +27,9 @@ namespace ServiceRegistry.Migrations
                     b.Property<DateTime>("Entered")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Host")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 

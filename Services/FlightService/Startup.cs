@@ -1,8 +1,8 @@
-using Flight.AsyncDataServices;
-using Flight.AsyncEventProcessing;
-using Flight.AsyncEventProcessing.MessageSubscriber;
-using Flight.Context;
-using Flight.Repositories;
+using FlightService.AsyncDataServices;
+using FlightService.AsyncEventProcessing;
+using FlightService.AsyncEventProcessing.MessageSubscriber;
+using FlightService.Context;
+using FlightService.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
 
-namespace Flight
+namespace FlightService
 {
     public class Startup
     {
@@ -25,6 +25,13 @@ namespace Flight
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => options.AddPolicy("FlightCorsPolicy", build =>
+            {
+                build.WithOrigins("http://localhost:8080")
+                     .AllowAnyMethod()
+                     .AllowAnyHeader();
+            }));
+
             services.AddControllers();
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -69,6 +76,8 @@ namespace Flight
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Flight v1"));
 
             app.UseHttpsRedirection();
+
+            app.UseCors("FlightCorsPolicy");
 
             app.UseRouting();
 

@@ -5,6 +5,7 @@
         Airport,
         Airplane,
         Flight,
-        Reservation
+        Reservation,
+        Identity
     }
 }

@@ -23,6 +23,13 @@ namespace Airport
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => options.AddPolicy("AirportCorsPolicy", build =>
+            {
+                build.WithOrigins("http://localhost:8080")
+                     .AllowAnyMethod()
+                     .AllowAnyHeader();
+            }));
+
             services.AddControllers();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -62,6 +69,8 @@ namespace Airport
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Airport v1"));
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AirportCorsPolicy");
 
             app.UseRouting();
 

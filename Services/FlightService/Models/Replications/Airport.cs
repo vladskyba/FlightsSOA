@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Flight.Models.Replications
+namespace FlightService.Models.Replications
 {
     public class Airport : BaseEntity
     {

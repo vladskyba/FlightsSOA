@@ -1,13 +1,15 @@
 ﻿using AirportService.DataTransfer;
+using FlightService.Models;
 using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
+using ReservationService.DateTransfer.Messaging;
 using System;
 using System.Text;
 using System.Text.Json;
 
-namespace Flight.AsyncDataServices
+namespace FlightService.AsyncDataServices
 {
-    public class MessageBusClient : IMessageBusClient, IDisposable
+    public class MessageBusClient : IMessageBusClient
     {
         private readonly IConfiguration _configuration;
         
@@ -43,7 +45,7 @@ namespace Flight.AsyncDataServices
 
         public void RegisterService() 
         {
-            var port = _configuration["SERVICE_PORT"];
+            var port = _configuration["SERVICE_PORT"] ?? "1";
 
             var serviceSettings = new ServiceSettings
             {
@@ -57,6 +59,30 @@ namespace Flight.AsyncDataServices
             if (_connection.IsOpen)
             {
                 SendMessage(message);
+            }
+        }
+
+        public void PushMessage<T>(T entity, string eventType)
+            where T : class
+        {
+            IncomingMessage<T> incoming = new IncomingMessage<T>
+            {
+                EntityPayload = entity,
+                Event = eventType
+            };
+
+            try
+            {
+                var message = JsonSerializer.Serialize(incoming);
+
+                if (_connection.IsOpen)
+                {
+                    SendMessage(message);
+                }
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine($"Error while pushing a message: {exception.Message}");
             }
         }
 

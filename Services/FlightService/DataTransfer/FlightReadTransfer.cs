@@ -1,6 +1,6 @@
-﻿namespace Flight.DataTransfer
+﻿namespace FlightService.DataTransfer
 {
-    public class FlightReadTransfer
+    public class FlightReadTransfer : FlightBaseTransfer
     {
         public AirportReadTransfer DepartureAirport { get; set; }
 

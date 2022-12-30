@@ -56,6 +56,24 @@ services:
       - rabbitmq
       - service-registry
 
+  reservation-service:
+    container_name: reservation-service
+    image: reservation-service
+    environment:
+      DB_SERVER: "sql-server"
+      SERVICE_NAME: "Reservation"
+      SERVICE_PORT: "6004"
+      RABBITMQ_HOST: "rabbitmq"
+      RABBITMQ_PORT: "5672"
+    ports:
+    - "6004:80"
+    build:
+      context: ./Services/ReservationService
+    depends_on:
+      - sql-server
+      - rabbitmq
+      - service-registry
+
   service-registry:
     container_name:  service-registry
     image:  service-registry

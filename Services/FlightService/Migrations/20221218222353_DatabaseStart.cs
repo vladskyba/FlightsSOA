@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Flight.Migrations
+namespace FlightService.Migrations
 {
     public partial class DatabaseStart : Migration
     {

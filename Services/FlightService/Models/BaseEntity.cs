@@ -1,4 +1,4 @@
-﻿namespace Flight.Models
+﻿namespace FlightService.Models
 {
     public class BaseEntity
     {

@@ -54,7 +54,7 @@ namespace Airport.AsyncDataServices
 
         public void RegisterService() 
         {
-            var port = _configuration["SERVICE_PORT"];
+            var port = _configuration["SERVICE_PORT"] ?? "1";
 
             var serviceSettings = new ServiceSettings
             {

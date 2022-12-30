@@ -1,4 +1,4 @@
-﻿namespace Flight.Enums
+﻿namespace FlightService.Enums
 {
     public enum FlightsStatus
     {

@@ -70,7 +70,7 @@ namespace Airplane.Controllers
             return Ok(_mapper.Map<PlaneSeatReadTransfer>(createdPlaneSeat));
         }
 
-        [HttpGet("getPlanes")]
+        [HttpGet("getAll")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
